@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Novo Pet{% endblock  %}
+
+{% block 'head' %}
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+{% endblock  %}
+
+{% block 'section' %}
+
+    <div class="wrapper">
+        <div class="box">
+            <div class="header-box">
+                <h3 class="font-vinho">Quero divulgar</h3>
+                <hr>
+            </div>
+            <div class="body-box">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert {{message.tags}} mt-3 p-2">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="{% url 'novo_pet' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+                    <input type="file" name="foto" class="form-control mb-3">
+                    <span>Nome:</span>
+                    <input type="text" class="form-control mb-3" name="nome" placeholder="Digite o nome do pet...">
+                    <span>Descrição:</span>
+                    <textarea class="form-control mb-3" name="descricao" placeholder="Descrição..."></textarea>
+
+                    <div class="row regiao mb-3">
+                        <div class="col-md">
+                            <span>Estado:</span>
+                            <input type="text" placeholder="Digite o estado do pet..." name="estado" class="form-control">
+                        </div>
+
+                        <div class="col-md">
+                            <span>Cidade:</span>
+                            <input type="text" placeholder="Digite a cidade do pet..." name="cidade" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <span>Telefone para contato:</span>
+                    <input type="text" placeholder="Digite o seu telefone..." name="telefone" class="form-control mb-3">
+                    
+                    <span>Tags:</span>
+                    <select name="tags" multiple class="form-select mb-3">
+                        {% for tag in tags%}
+                            <option value="{{tag.id}}">{{tag}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <span>Raça:</span>
+                    <select name="raca" class="form-select">
+                        {% for raca in racas%}
+                            <option value="{{raca.id}}">{{raca}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="SALVAR" class="btn-custom-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}

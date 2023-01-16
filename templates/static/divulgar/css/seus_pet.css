@@ -1,0 +1,40 @@
+.width80{
+    width: 80vw; 
+}
+
+.tabela {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.tabela thead th {
+    font-weight: normal;
+    padding-bottom: 8px;
+}
+
+thead th {
+    font-weight: normal;
+    /* padding-bottom: 8px; */
+}
+
+.tabela-linha {
+    background-color: #dad9d9;
+    border-bottom: 1px solid gray;
+    vertical-align: middle;
+}
+
+.tabela-linha .badge {
+    border-radius: 1rem;
+    width: 5rem;
+    height: 1.5rem;
+    padding-top: 6px;
+    font-weight: normal;
+}
+
+.tabela-linha a {
+    border-radius: 1rem;
+    /* width: 5rem; */
+    height: 1.5rem;
+    padding-top: 0;
+}

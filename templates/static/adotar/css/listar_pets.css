@@ -1,0 +1,108 @@
+.btn-custom-secondary {
+    background-color: #762D77;
+    border: none;
+    box-shadow: 2px 2px 5px 1px rgb(108, 108, 108);
+    color: white;
+    font-size: 20px;
+    padding: 0 20px;
+    border-radius: 10px;
+    height: 38px;
+}
+
+.span-bold{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.span-bold2{
+    font-weight: bold;
+    font-size: 20px;
+    /* margin-bottom: .5rem; */
+}
+
+.span-bold3{
+    font-weight: bold;
+    font-size: 12px;
+    /* margin-bottom: .5rem; */
+}
+
+.span-bold2 + p {
+    font-size: 24px;
+    margin-bottom: .5rem;
+}
+
+.tags-pet {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 80%;
+    gap: 1rem;
+}
+
+.descricao-pet {
+    text-align: justify;
+}
+
+.pedido-adocoes {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2rem;
+}
+
+.pedido-adocoes .card {
+    background-color: #D6D6D6;
+    border: none;
+    border-radius: 1rem;
+}
+
+.pedido-adocoes .card > span:nth-child(1) {
+    background-color: #a19f9f;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pedido-adocoes .card-title {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.pedido-adocoes .card-body > p {
+    font-size: 14px;
+    margin-bottom: 8px;
+} 
+
+.pedido-adocoes .botoes {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+}
+
+.pedido-adocoes .botoes > a {
+    border-radius: 1.5rem;
+    padding: 0 1rem;
+} 
+
+.form-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto 40px auto;
+    gap: 1rem;
+}
+
+.tabela-linha > td:nth-child(1) {
+    text-align: left;
+    padding: 0;
+}
+
+.badge-lg{
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.bg-side-plataforma{
+    background-color: #391D34;
+    color: white;
+}

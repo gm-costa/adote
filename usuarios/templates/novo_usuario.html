@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Cadastro{% endblock  %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
+{% endblock  %}
+
+{% block 'aside' %}
+
+    <div class="header">
+        <img src="{% static 'usuarios/img/logo_adote.png' %}" alt="logo adote">
+        <span class="font-logo">ADO.TE</span>
+    </div>
+
+    <div class="body-form">
+
+        <h2>Cadastre-se</h2>
+        <p>Seu cadastro salva vidas.</p>
+        <hr>
+        <form action="{% url 'cadastro' %}" method="POST">
+            {% csrf_token %}
+            <span>Nome:</span>
+            <input type="text" class="form-control mb-3" placeholder="Digite seu nome..." name="nome">
+            
+            <span>E-mail:</span>
+            <input type="email" class="form-control mb-3" placeholder="Digite seu email..." name="email">
+            
+            <div class="row senhas">
+                <div class="col-md">
+                    <span>Senha:</span>
+                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
+                </div>
+                <div class="col-md">
+                    <span>Confirmar senha:</span>
+                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="confirmar_senha">
+                </div>
+            </div>
+
+            <input type="submit" value="SALVAR" class="btn-custom-primary">
+
+            <a href="{% url 'login' %}" class="link-float">Já tenho uma conta</a>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tags}} mt-4">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+{% endblock  %}
+
+{% block 'section' %}
+
+    <div class="side-logo">
+        <img class="logo-margin-top" src="{% static 'usuarios/img/logo_adote.png' %}">
+        <h1>ADO.TE</h1>
+        <p>Nos ajude a salvar vidas.</p>
+    </div>
+
+{% endblock  %}

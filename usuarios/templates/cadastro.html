@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-5 bg-side">
                     <div class='header'>
-                        <img src="{% static 'usuarios/img/logo_adote.png' %}" width="9%"><span class="font-logo">ADO.TE</span>
+                        <img src="{% static 'usuarios/img/logo_adote.png' %}"><span class="font-logo">ADO.TE</span>
                     </div>
 
                     <div class="body-form">
@@ -24,18 +24,16 @@
                         <form action="{% url 'cadastro' %}" method="POST">
                             {% csrf_token %}
                             <span>Nome:</span>
-                            <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome">
-                            <br>
+                            <input type="text" class="form-control mb-3" placeholder="Digite seu nome..." name="nome">
+                            
                             <span>E-mail:</span>
-                            <input type="email" class="form-control" placeholder="Digite seu email..." name="email">
-                            <br>
-                            <div class="row">
-
+                            <input type="email" class="form-control mb-3" placeholder="Digite seu email..." name="email">
+                            
+                            <div class="row senhas">
                                 <div class="col-md">
                                     <span>Senha:</span>
                                     <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
                                 </div>
-
                                 <div class="col-md">
                                     <span>Confirmar senha:</span>
                                     <input type="password" class="form-control" placeholder="Digite sua senha..." name="confirmar_senha">
@@ -43,8 +41,8 @@
                             </div>
 
                             <input type="submit" value="SALVAR" class="btn-custom-primary">
-                        
-                            <a href="" class="link-float">Já tenho uma conta</a>
+
+                            <a href="{% url 'login' %}" class="link-float">Já tenho uma conta</a>
                         </form>
                         {% if messages %}
                             {% for message in messages %}
@@ -58,7 +56,7 @@
 
                 <div class="col-md-7">
                     <div class="side-logo">
-                        <img class="logo-margin-top" src="{% static 'usuarios/img/logo_adote.png' %}" width="20%">
+                        <img class="logo-margin-top" src="{% static 'usuarios/img/logo_adote.png' %}">
                         <h1>ADO.TE</h1>
                         <p>Nos ajude a salvar vidas.</p>
                     </div>

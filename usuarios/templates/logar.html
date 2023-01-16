@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Cadastro{% endblock  %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
+{% endblock  %}
+
+{% block 'aside' %}
+
+    <div class="header">
+        <img src="{% static 'usuarios/img/logo_adote.png' %}" alt="logo adote">
+        <span class="font-logo">ADO.TE</span>
+    </div>
+
+    <div class="body-form">
+                        
+        <h2>Logar</h2>
+        <p>Que bom ter você de volta.</p>
+        <hr>
+        <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+            <span>Nome:</span>
+            <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome">
+            <br>
+
+            <span>Senha:</span>
+            <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
+                
+
+            <input type="submit" value="LOGAR" class="btn-custom-primary">
+        
+            <a href="{% url 'cadastro' %}" class="link-float">Cadastre-se</a>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{message.tags}} mt-4">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock  %}
+
+{% block 'section' %}
+
+    <div class="side-logo">
+        <img class="logo-margin-top" src="{% static 'usuarios/img/logo_adote.png' %}">
+        <h1>ADO.TE</h1>
+        <p>Nos ajude a salvar vidas.</p>
+    </div>
+
+{% endblock  %}

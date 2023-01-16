@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Informações do pet{% endblock  %}
+
+{% block 'head' %}
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adotar/css/listar_pets.css' %}" rel="stylesheet">
+{% endblock  %}
+
+{% block 'section' %}
+
+    <div class="col-md p-5">
+        <h3 class="font-vinho mb-3">Informações do pet</h3>
+        <div class="row">
+            <div class="col-md-5">
+                <img width="100%" src="{{pet.foto.url}}">
+            </div>
+            <div class="col-md-7">
+                <span class="span-bold2">Nome:</span>
+                <p>{{pet.nome}}</p>
+                <div class="tags-pet">
+                    {% for tag in pet.tags.all %}
+                        <span class="badge text-bg-info text-white fw-normal badge-md">{{tag}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>  
+        
+        <div class="row mt-3">
+            <div class="col-md-7"> 
+                <span class="span-bold2">Descrição:</span>
+                <p class="fs-6 descricao-pet">{{pet.descricao}}</p>
+                
+                <span class="span-bold2">Raça:</span>
+                <p class="fs-6">{{pet.raca}}</p>
+            </div>
+
+            <div class="col-md-5">
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <h3 class="font-vinho">Informações residenciais</h3>
+            <div class="col-md">
+                <div class="row">
+                    <div class="col-md">
+                        <span class="span-bold">Estado</span>
+                        <p>{{pet.estado}}</p>
+                    </div>
+
+                    <div class="col-md">
+                        <span class="span-bold">Cidade</span>
+                        <p>{{pet.cidade}}</p>
+                    </div>
+                </div>
+                <span class="span-bold">Telefone para contato</span>
+                <p>{{pet.telefone}}</p>
+
+                <a href="{% url 'pedido_adocao' pet.id %}" class="btn btn-success btn-lg mt-3">SOLICITAR ADOÇÃO</a>
+                
+            </div>
+
+            <div class="col-md">
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}                
