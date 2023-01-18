@@ -96,7 +96,7 @@ def ver_pet(request, id):
 @login_required
 def ver_pedido_adocao(request):
     if request.method == "GET":
-        pedidos = PedidoAdocao.objects.filter(usuario=request.user).filter(status="AG")
+        pedidos = PedidoAdocao.objects.filter(status="AG").exclude(usuario=request.user)
         return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos, 'usuario': request.user.username})
 
 @login_required

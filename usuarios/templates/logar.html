@@ -22,11 +22,11 @@
         <hr>
         <form action="{% url 'login' %}" method="POST">{% csrf_token %}
             <span>Nome:</span>
-            <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome">
+            <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome" value="{{nome}}" autofocus>
             <br>
 
             <span>Senha:</span>
-            <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
+            <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha" value="{{senha}}">
                 
 
             <input type="submit" value="LOGAR" class="btn-custom-primary">

@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 @login_required
 def listar_pets(request):
     if request.method == "GET":
-        pets = Pet.objects.filter(status="P")
+        pets = Pet.objects.filter(status="P").exclude(usuario=request.user)
         racas = Raca.objects.all()
 
         cidade = request.GET.get('cidade')
