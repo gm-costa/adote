@@ -25,7 +25,7 @@ class Pet(models.Model):
     descricao = models.TextField()
     estado = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
-    telefone = models.CharField(max_length=14)
+    telefone = models.CharField(max_length=15)
     tags = models.ManyToManyField(Tag)
     raca = models.ForeignKey(Raca, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=1, choices=choices_status, default='P')

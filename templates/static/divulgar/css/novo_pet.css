@@ -20,7 +20,7 @@
 .bg-side {
     background-color: rgb(57, 29, 52, 0.98);
     color: white;
-    min-height: 100vh;
+    min-height: 92vh;
     text-align: center;
     padding: 20px;
     width: 20%;
@@ -40,6 +40,8 @@
 
 .section {
     width: 80%;
+    max-height: 92vh;
+    overflow-y: auto;
 }
 
 /* fim configuração com extends */

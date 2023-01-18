@@ -28,7 +28,7 @@
                 <form action="{% url 'novo_pet' %}" method="POST" enctype='multipart/form-data'>{% csrf_token %}
                     <input type="file" name="foto" class="form-control mb-3">
                     <span>Nome:</span>
-                    <input type="text" class="form-control mb-3" name="nome" placeholder="Digite o nome do pet...">
+                    <input type="text" class="form-control mb-3" name="nome" placeholder="Digite o nome do pet..." autofocus>
                     <span>Descrição:</span>
                     <textarea class="form-control mb-3" name="descricao" placeholder="Descrição..."></textarea>
 
@@ -45,7 +45,7 @@
                     </div>
                     
                     <span>Telefone para contato:</span>
-                    <input type="text" placeholder="Digite o seu telefone..." name="telefone" class="form-control mb-3">
+                    <input type="text" placeholder="Digite o seu telefone..." name="telefone" onkeypress="$(this).mask('(00) 00000-0000')" maxlength="15" class="form-control mb-3">
                     
                     <span>Tags:</span>
                     <select name="tags" multiple class="form-select mb-3">
@@ -66,5 +66,8 @@
             </div>
         </div>
     </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js"></script>
 
 {% endblock  %}

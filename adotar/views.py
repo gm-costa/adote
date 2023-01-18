@@ -63,7 +63,6 @@ def processa_pedido_adocao(request, id_pedido):
         pedido.status = 'R'
 
     pedido.save()
-
     
     print(pedido.usuario.email)
     email = send_mail(
@@ -74,4 +73,4 @@ def processa_pedido_adocao(request, id_pedido):
     )
     
     messages.add_message(request, messages.SUCCESS, 'Pedido de adoção processado com sucesso')
-    return redirect('/divulgar/ver_pedido_adocao')
+    return redirect(reverse('ver_pedido_adocao'))

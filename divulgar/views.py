@@ -102,7 +102,7 @@ def ver_pedido_adocao(request):
 @login_required
 def dashboard(request):
     if request.method == "GET":
-        return render(request, 'dashboard.html')
+        return render(request, 'dashboard.html', {'usuario': request.user.username})
 
 @csrf_exempt
 def api_adocoes_por_raca(request):

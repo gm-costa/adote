@@ -12,7 +12,7 @@
     background-color: rgb(57, 29, 52, 0.98);
     color: white;
     width: 40%;
-    min-height: 100vh;
+    min-height: 92vh;
 }
 
 .dropdown-menu {
@@ -79,6 +79,7 @@
 
 .section {
     width: 60%;
+    /* overflow-y: auto; */
 }
 
 .side-logo{
@@ -94,12 +95,16 @@ footer {
     background-color: #391d34;
     color: #fff;
     margin: 0 -12px;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.footer-inner {
+/* .footer-inner {
     text-align: center;
     padding: 1rem 0;
-}
+} */
 
 @media (max-width: 804px) {
     .senhas {

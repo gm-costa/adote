@@ -26,7 +26,7 @@
             <hr>
             <form action="{% url 'listar_pets' %}" method="GET">
                 <div class="form-grid">
-                    <input type="text" placeholder="Cidade..." value="{% if cidade %}{{cidade}}{% endif %}" name="cidade" class="form-control">
+                    <input type="text" placeholder="Cidade..." value="{% if cidade %}{{cidade}}{% endif %}" name="cidade" class="form-control" autofocus>
                     <select class="form-select" name="raca">
                         <option value="">Selecione a raça...</option>
                         {% for raca in racas %}

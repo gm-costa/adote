@@ -25,7 +25,6 @@
         {% endif %}
         <div class="pedido-adocoes mt-4">
             {% for pedido in pedidos %}
-                {% comment %} <div class="col-md-3"> {% endcomment %}
                 <div class="card">
                     <span>{{pedido.pet.nome}}</span>
                     <img class="card-img-top" src="{{pedido.pet.foto.url}}">
@@ -42,7 +41,6 @@
                         </div>
                     </div>
                 </div>
-                {% comment %} </div> {% endcomment %}
             {% endfor %}
         </div>
     </div>
