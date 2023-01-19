@@ -61,7 +61,7 @@ def logar(request):
 
         if user is not None:
             login(request, user)
-            return redirect(reverse('novo_pet'))
+            return redirect(reverse('seus_pets'))
         else:
             messages.add_message(request, messages.ERROR, 'Usuário ou senha inválidos')
             return render(request, template_name, {'nome': nome, 'senha': senha})
