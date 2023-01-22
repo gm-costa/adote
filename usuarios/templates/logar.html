@@ -20,19 +20,18 @@
         <h2>Logar</h2>
         <p>Que bom ter você de volta.</p>
         <hr>
-        <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'login' %}" method="POST" class="mb-4">{% csrf_token %}
             <span>Nome:</span>
-            <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome" value="{{nome}}" autofocus>
-            <br>
+            <input type="text" class="form-control mb-3" placeholder="Digite seu nome..." name="nome" value="{{nome}}" autofocus>
 
             <span>Senha:</span>
             <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha" value="{{senha}}">
-                
 
             <input type="submit" value="LOGAR" class="btn-custom-primary">
         
             <a href="{% url 'cadastro' %}" class="link-float">Cadastre-se</a>
         </form>
+        <a href="#modalSenha" class="text-decoration-none" data-bs-toggle="modal">Não lembro a senha</a>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {{message.tags}} mt-4">
@@ -40,6 +39,28 @@
                 </div>
             {% endfor %}
         {% endif %}
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalSenha" tabindex="-1" aria-labelledby="modalSenhaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalSenhaLabel">Recuperar senha</h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">{% csrf_token %}
+                        <span>E-mail:</span>
+                        <input type="email" class="form-control" placeholder="Digite seu e-mail..." id="email" name="email" autofocus>
+                        <div class="mt-4 d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary ms-4">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock  %}

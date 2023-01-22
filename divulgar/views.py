@@ -96,25 +96,51 @@ def ver_pet(request, id):
 @login_required
 def ver_pedido_adocao(request):
     if request.method == "GET":
-        pedidos = PedidoAdocao.objects.filter(status="AG").exclude(usuario=request.user)
+        # pedidos = PedidoAdocao.objects.filter(status="AG").filter(usuario=request.user)
+        pedidos = PedidoAdocao.objects.filter(status="AG").filter(pet__usuario__id=request.user.id)
         return render(request, 'ver_pedido_adocao.html', {'pedidos': pedidos, 'usuario': request.user.username})
 
 @login_required
 def dashboard(request):
     if request.method == "GET":
-        return render(request, 'dashboard.html', {'usuario': request.user.username})
+        pets_pedidos = list(set([pa.pet_id for pa in PedidoAdocao.objects.all()]))
+        cidades = list(set([p.cidade for p in Pet.objects.filter(id__in=pets_pedidos)]))
+        context = {
+            'usuario': request.user.username, 
+            'cidades': sorted(cidades),
+        }
+        return render(request, 'dash.html', context)
 
+@login_required
 @csrf_exempt
 def api_adocoes_por_raca(request):
     racas = Raca.objects.all()
+    cidade = request.GET.get('cidade')
 
+    pets_cidade = [p.id for p in Pet.objects.filter(cidade=cidade)]
+
+    qtd_solicitacoes = []
     qtd_adocoes = []
+
     for raca in racas:
-        adocoes = PedidoAdocao.objects.filter(pet__raca=raca).count()
+        # solicitacoes = PedidoAdocao.objects.filter(pet__raca=raca).count()
+        pedidos = PedidoAdocao.objects.filter(pet__raca=raca)
+        
+        if cidade:
+            pedidos = pedidos.filter(pet_id__in=pets_cidade)
+
+        solicitacoes = pedidos.count()
+        adocoes = pedidos.filter(status='AP').count()
+        
+        qtd_solicitacoes.append(solicitacoes)
         qtd_adocoes.append(adocoes)
 
     racas = [raca.raca for raca in racas]
-    data = {'qtd_adocoes': qtd_adocoes,
-            'labels': racas}
+
+    data = {
+        'labels': racas,
+        'qtd_solicitacoes': qtd_solicitacoes,
+        'qtd_adocoes': qtd_adocoes,
+    }
 
     return JsonResponse(data)

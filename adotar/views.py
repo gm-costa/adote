@@ -11,7 +11,15 @@ from django.core.mail import send_mail
 @login_required
 def listar_pets(request):
     if request.method == "GET":
+        # Obtém as solicitações do usuário logado
+        pedidos = PedidoAdocao.objects.filter(status='AG').filter(usuario_id=request.user.id)
+        pedidos = [p.pet_id for p in pedidos]
+
         pets = Pet.objects.filter(status="P").exclude(usuario=request.user)
+
+        # Excluir pets solicitados pelo mesmo usuário
+        pets = pets.exclude(id__in=pedidos)
+
         racas = Raca.objects.all()
 
         cidade = request.GET.get('cidade')
@@ -55,22 +63,42 @@ def pedido_adocao(request, id_pet):
 def processa_pedido_adocao(request, id_pedido):
     status = request.GET.get('status')
     pedido = PedidoAdocao.objects.get(id=id_pedido)
+    pet = Pet.objects.get(id=pedido.pet.id)
+
     if status == "A":
         pedido.status = 'AP'
+        pet.status = 'A'
         string = '''Olá, sua adoção foi aprovada. ...'''
     elif status == "R":
         string = '''Olá, sua adoção foi recusada. ...'''
         pedido.status = 'R'
 
+    #TODO: implantar transaction atomic, e automaticamente recusar as outras solicitações para este pet
+
     pedido.save()
-    
-    print(pedido.usuario.email)
+    if status == "A":
+        pet.status = 'A'
+        pet.save()
+
+        solicitacoes = PedidoAdocao.objects.filter(pet_id=pet.id).exclude(usuario_id=pedido.usuario.id)
+        if solicitacoes:
+            for solicitacao in solicitacoes:
+                solicitacao.status='R'
+                solicitacao.save()
+                send_mail(
+                    'Sua adoção foi processada',
+                    '''Adoção do pet concedida a outro, levando em considereção diversos motivos, 
+                    entre eles a data/hora da solicitação.''',
+                    request.user.email,
+                    [solicitacao.usuario.email,]
+                )
+        
     email = send_mail(
         'Sua adoção foi processada',
         string,
-        'gmaia@teste.com',
-        [pedido.usuario.email,],
+        request.user.email,
+        [pedido.usuario.email,]
     )
     
-    messages.add_message(request, messages.SUCCESS, 'Pedido de adoção processado com sucesso')
+    messages.add_message(request, messages.SUCCESS, 'Pedido de adoção processado com sucesso.')
     return redirect(reverse('ver_pedido_adocao'))

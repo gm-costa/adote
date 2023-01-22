@@ -18,4 +18,4 @@ class PedidoAdocao(models.Model):
         verbose_name_plural = "PedidoAdoções"
 
     def __str__(self) -> str:
-        return f'Pet: {self.pet} - Solicitado por {self.usuario}'
+        return f'{self.pet} - Solicitado por {self.usuario}'

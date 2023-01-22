@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block 'title' %}Lista de pets{% endblock  %}
+
+{% block 'head' %}
+    <link href="{% static 'usuarios/css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/novo_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+    <link href="{% static 'adotar/css/listar_pets.css' %}" rel="stylesheet">
+{% endblock  %}
+
+{% block 'section' %}
+
+    <div class="mt-5 px-5">
+        <h3 class="font-vinho text-center mb-3">Quantidade de pets por raça</h3>
+        <div class="w-50">
+            <span>Cidade</span>
+            <select name="cidade" id="cidade" class="form-select">
+                <option value=""></option>
+                {% for cidade in cidades %}
+                    <option value="{{cidade}}">{{cidade}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="my-4 w-75">
+            <canvas id="lineChart"></canvas>
+        </div>  
+        
+        <div class="w-75">
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        const lineChartBox = document.getElementById('lineChart');
+        const barChartBox = document.getElementById('barChart');
+        const cidadeSelect = document.getElementById('cidade');
+        let lineChart = null;
+        let barChart = null;
+
+        function gerarGrafico() {
+            let url = "/divulgar/api_adocoes_por_raca/?cidade=" + cidadeSelect.value;
+            
+            console.log(url);
+            
+            fetch(url, {
+                method: 'GET',
+            }).then(function(result){
+                return result.json()
+            }).then(function(data_result){
+                
+                const data = {
+                    labels: data_result['labels'],
+                    datasets: [
+                        {
+                            label: 'Solicitados',
+                            backgroundColor: 'rgb(255, 99, 132, 0.2)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            borderWidth: 1,
+                            data: data_result['qtd_solicitacoes'],
+                        },
+                        {
+                            label: 'Adotados',
+                            backgroundColor: 'rgb(54, 162, 235, 0.2)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            borderWidth: 1,
+                            data: data_result['qtd_adocoes'],
+                        },
+                    ]
+                };
+
+                const config = {
+                    type: 'line',
+                    data: data,
+                    options: {}
+                };
+
+                if (lineChart != null) {
+                    lineChart.destroy();
+                };
+
+                lineChart = new Chart(
+                    lineChartBox,
+                    config
+                );
+
+                if (barChart != null) {
+                    barChart.destroy();
+                };
+
+                barChart = new Chart(
+                    barChartBox,
+                    {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                }
+                            }
+                        }
+                    }
+                );
+            });
+        };
+
+        gerarGrafico();
+
+        cidadeSelect.addEventListener('change', () => {
+            gerarGrafico();
+        });
+        
+    </script>
+
+{% endblock  %}

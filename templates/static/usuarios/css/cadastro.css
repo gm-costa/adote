@@ -15,6 +15,10 @@
     min-height: 92vh;
 }
 
+.bg-side ul {
+    text-transform: uppercase;
+}
+
 .dropdown-menu {
     background-color: transparent;
     border: none;
@@ -75,6 +79,10 @@
     text-decoration: none;
     float: right;
     margin-top: 32px;
+}
+
+.modal-content {
+    background-color: #391d34;
 }
 
 .section {

@@ -45,7 +45,7 @@
                     </div>
                     
                     <span>Telefone para contato:</span>
-                    <input type="text" placeholder="Digite o seu telefone..." name="telefone" onkeypress="$(this).mask('(00) 00000-0000')" maxlength="15" class="form-control mb-3">
+                    <input type="text" placeholder="Digite o seu telefone..." name="telefone" maxlength="15" class="form-control phone-ddd mb-3">
                     
                     <span>Tags:</span>
                     <select name="tags" multiple class="form-select mb-3">
@@ -68,6 +68,10 @@
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.phone-ddd').mask('(00) 00000-0000');
+        });
+    </script>
 {% endblock  %}

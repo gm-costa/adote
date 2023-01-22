@@ -28,13 +28,12 @@ def cadastro(request):
             return render(request, template_name)
 
         try:
-            user = User.objects.create_user(
+            User.objects.create_user(
                 username=nome,
                 email=email,
                 password=senha,
             )
             messages.add_message(request, messages.SUCCESS, 'Usuário cadastrado com sucesso.')
-            # return render(request, template_name)
         except:
             messages.add_message(request, messages.ERROR, 'Ocorreu um erro ao tentar salvar, tente novamente!')
             
@@ -44,7 +43,7 @@ def logar(request):
     template_name = 'logar.html'
     if request.user.is_authenticated:
         # return redirect('/divulgar/novo_pet')
-        return redirect(reverse('novo_pet'))
+        return redirect(reverse('seus_pets'))
         
     if request.method == "GET":
         return render(request, template_name)
@@ -56,15 +55,32 @@ def logar(request):
             messages.add_message(request, messages.WARNING, 'Preencha todos os campos!')
             return render(request, template_name)
 
-        user = authenticate(username=nome.lower(),
-                            password=senha)
+        user = authenticate(username=nome.lower(), password=senha)
 
         if user is not None:
             login(request, user)
             return redirect(reverse('seus_pets'))
         else:
-            messages.add_message(request, messages.ERROR, 'Usuário ou senha inválidos')
+            messages.add_message(request, messages.ERROR, 'Usuário ou senha inválidos!')
             return render(request, template_name, {'nome': nome, 'senha': senha})
+
+def recuperar_senha(request, email):
+    usuario = User.objects.get(email=email)
+    if not usuario:
+        messages.add_message(request, messages.ERROR, f"Usuário não localizado para '{email}'.")
+        return redirect(reverse('logar'))
+
+    assunto = 'Pedido de recuperação de senha do ADOTE'
+    mensagem = f"""Olá, {usuario.username}!
+    
+    Sua senha do ADOTE pode ser redefinida clicando no link abaixo. 
+    Se você não solicitou uma nova senha, ignore este e-mail.
+    
+    <a href='http://127.0.0.1:8000/auth/redefinir_senha/{usuario.id}'>Redefinir senha</a>
+    """
+
+def redefinir_senha(request, id):
+    pass
 
 def sair(request):
     logout(request)
