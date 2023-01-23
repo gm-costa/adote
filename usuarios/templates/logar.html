@@ -27,11 +27,13 @@
             <span>Senha:</span>
             <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha" value="{{senha}}">
 
-            <input type="submit" value="LOGAR" class="btn-custom-primary">
-        
-            <a href="{% url 'cadastro' %}" class="link-float">Cadastre-se</a>
+            <div class="botoes-form">
+                <input type="submit" value="LOGAR" class="btn-custom-primary">
+                <a href="{% url 'cadastro' %}" class="">Cadastre-se</a>
+                {% comment %} <a href="#modalSenha" class="text-decoration-none" data-bs-toggle="modal">Não lembro a senha</a> {% endcomment %}
+                <a href="#modalSenha" class="" data-bs-toggle="modal">Não lembro a senha</a>
+            </div>
         </form>
-        <a href="#modalSenha" class="text-decoration-none" data-bs-toggle="modal">Não lembro a senha</a>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {{message.tags}} mt-4">
@@ -50,7 +52,7 @@
                     <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">{% csrf_token %}
+                    <form id="form-recupera-senha" method="POST">{% csrf_token %}
                         <span>E-mail:</span>
                         <input type="email" class="form-control" placeholder="Digite seu e-mail..." id="email" name="email" autofocus>
                         <div class="mt-4 d-flex justify-content-end">
@@ -73,4 +75,16 @@
         <p>Nos ajude a salvar vidas.</p>
     </div>
 
+{% endblock  %}
+
+{% block 'script' %}
+    <script>
+        const formRecuperaSenha = document.getElementById('form-recupera-senha');
+
+        formRecuperaSenha.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+        })
+
+    </script>
 {% endblock  %}

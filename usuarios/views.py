@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse
+from django.core.mail import send_mail
 
 
 def cadastro(request):
@@ -78,6 +79,16 @@ def recuperar_senha(request, email):
     
     <a href='http://127.0.0.1:8000/auth/redefinir_senha/{usuario.id}'>Redefinir senha</a>
     """
+
+    email = send_mail(
+        assunto,
+        mensagem,
+        '',
+        [email,]
+    )
+    if email:
+        messages.add_message(request, messages.SUCCESS, f"Instruções enviada para '{email}', verifique sua caixa postal.")
+        return redirect(reverse('logar'))
 
 def redefinir_senha(request, id):
     pass

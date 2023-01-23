@@ -81,6 +81,24 @@
     margin-top: 32px;
 }
 
+.botoes-form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.botoes-form input {
+    margin-top: 0;
+}
+
+.botoes-form a {
+    text-decoration: none;
+    /* margin-top: 24px; */
+}
+
 .modal-content {
     background-color: #391d34;
 }
@@ -113,6 +131,15 @@ footer {
     text-align: center;
     padding: 1rem 0;
 } */
+
+@media (max-width: 1120px) {
+    .botoes-form {
+        grid-template-columns: auto;
+    }
+    .botoes-form a:first-of-type {
+        margin-top: 8px;
+    }
+}
 
 @media (max-width: 804px) {
     .senhas {
