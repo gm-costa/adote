@@ -123,7 +123,6 @@ def api_adocoes_por_raca(request):
     qtd_adocoes = []
 
     for raca in racas:
-        # solicitacoes = PedidoAdocao.objects.filter(pet__raca=raca).count()
         pedidos = PedidoAdocao.objects.filter(pet__raca=raca)
         
         if cidade:

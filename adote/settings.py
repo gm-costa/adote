@@ -149,7 +149,7 @@ MESSAGE_TAGS = {
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Login
-LOGIN_URL = '/auth/login/'
+LOGIN_URL = '/auth/logar/'
 
 # Email
 

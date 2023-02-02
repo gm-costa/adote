@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block 'title' %}Login{% endblock  %}
+{% block 'title' %}Recupera senha{% endblock  %}
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
@@ -17,22 +17,21 @@
 
     <div class="body-form">
                         
-        <h2>Logar</h2>
-        <p>Que bom ter você de volta.</p>
+        <h2>Recuperar senha</h2>
+        <p>Estamos aqui para lhe ajudar.</p>
         <hr>
-        <form action="{% url 'logar' %}" method="POST" class="mb-4">{% csrf_token %}
-            <span>Nome:</span>
-            <input type="text" class="form-control mb-3" placeholder="Digite seu nome..." name="nome" value="{{nome}}" autofocus>
-
-            <span>Senha:</span>
-            <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha" value="{{senha}}">
-
-            <div class="botoes-form">
-                <input type="submit" value="LOGAR" class="btn-custom-primary">
-                <a href="{% url 'cadastro' %}" class="">Cadastre-se</a>
-                <a href="{% url 'recuperar_senha' %}">Não lembro a senha</a>
+        <form action="{% url 'recuperar_senha' %}" method="POST" class="mb-4">
+            {% csrf_token %}
+            
+            <span>E-mail:</span>
+            <input type="email" class="form-control" placeholder="Digite seu e-mail..." name="email" required autofocus>
+            
+            <div class="botoes-form-recupera">
+                <input type="submit" value="RECUPERAR" class="btn-custom-primary mt-0">
+                <p class="my-0">Lembrou da senha? &nbsp;<a href="{% url 'logar' %}">Logue-se</a></p>
             </div>
         </form>
+
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {{message.tags}} mt-4">
@@ -54,3 +53,4 @@
     </div>
 
 {% endblock  %}
+

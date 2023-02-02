@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block 'title' %}Cadastro{% endblock  %}
+{% block 'title' %}Redefinir senha{% endblock  %}
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">
@@ -16,33 +16,28 @@
     </div>
 
     <div class="body-form">
-
-        <h2>Cadastre-se</h2>
-        <p>Seu cadastro salva vidas.</p>
+                        
+        <h2>Redefinir senha</h2>
+        <p>Lembre-se, senha é pessoal.</p>
         <hr>
-        <form action="{% url 'cadastro' %}" method="POST">
+        <form action="{% url 'redefinir_senha' token %}" method="POST" class="mb-4">
             {% csrf_token %}
-            <span>Nome:</span>
-            <input type="text" class="form-control mb-3" placeholder="Digite seu nome..." name="nome">
-            
-            <span>E-mail:</span>
-            <input type="email" class="form-control mb-3" placeholder="Digite seu email..." name="email">
-            
             <div class="row senhas">
                 <div class="col-md">
-                    <span>Senha:</span>
-                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="senha">
+                    <span>Nova Senha:</span>
+                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="nova_senha">
                 </div>
                 <div class="col-md">
-                    <span>Confirmar senha:</span>
-                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="confirmar_senha">
+                    <span>Confirmar nova senha:</span>
+                    <input type="password" class="form-control" placeholder="Digite sua senha..." name="confirmar_nova_senha">
                 </div>
             </div>
-
-            <input type="submit" value="SALVAR" class="btn-custom-primary">
-
-            <a href="{% url 'logar' %}" class="link-float">Já tenho uma conta</a>
+            <div class="botoes-form-recupera">
+                <input type="submit" value="ENVIAR" class="btn-custom-primary mt-0">
+                <p class="my-0">Lembrou da senha? &nbsp;<a href="{% url 'logar' %}">Logue-se</a></p>
+            </div>
         </form>
+
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {{message.tags}} mt-4">
@@ -64,3 +59,4 @@
     </div>
 
 {% endblock  %}
+
